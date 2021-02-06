@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+    dataBinding {
+        enabled = true
+    }
+    defaultConfig {
+        applicationId "com.gofynd"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "String", "apiKey", "\"2842ea850bcbf706492dfcba37c576d0\""
+            buildConfigField "String", "baseUrl", "\"https://api.themoviedb.org/3/\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "apiKey", "\"2842ea850bcbf706492dfcba37c576d0\""
+            buildConfigField "String", "baseUrl", "\"https://api.themoviedb.org/3/\""
+        }
+    }
+
+}
+
+def junit_version = "1.1.0"
+def espresso_version = "3.1.0"
+def lifecycle_version = "1.1.1"
+def paging_version = "1.0.1"
+def retrofit_version = "2.5.0"
+def glide_version = "4.9.0"
+def roomdb_version = "1.0.0"
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation "androidx.test:runner:$junit_version"
+    androidTestImplementation "androidx.test:rules:$junit_version"
+
+
+
+    implementation "android.arch.persistence.room:runtime:$roomdb_version"
+    kapt "android.arch.persistence.room:compiler:$roomdb_version"
+
+    // Assertions
+    androidTestImplementation "androidx.test.ext:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:truth:$junit_version"
+    androidTestImplementation 'com.google.truth:truth:0.42'
+
+    // Espresso dependencies
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    // glide for image
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //Life observer
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version"
+    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.android.material:material:1.2.1'
+    //paging
+    implementation "android.arch.paging:runtime:$paging_version"
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}
