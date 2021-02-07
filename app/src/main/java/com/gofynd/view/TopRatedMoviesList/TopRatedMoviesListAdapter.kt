@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gofynd.R
+import com.gofynd.database.WishListDatabase
 import com.gofynd.database.Wishlist
 import com.gofynd.databinding.LayoutSubitemTopratedmovieBinding
 
@@ -20,7 +21,6 @@ import com.gofynd.model.topRateMoviesList.TopRatedMovie
 import com.gofynd.sharedpreferences.SharedPreferencesName
 import com.gofynd.view.TopRatedMovieDetail.TopRatedMovieDetail
 import com.gofynd.view.TopRatedMoviesList.TopRatedMoviesListAdapter.PlayerViewHolder
-import com.gofynd.view.WillyWeatherApplication
 import com.google.gson.Gson
 
 
@@ -45,7 +45,7 @@ class TopRatedMoviesListAdapter : PagedListAdapter<TopRatedMovie, PlayerViewHold
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         var topRatedMovie : TopRatedMovie? =getItem(position)
         holder.binding.movie = topRatedMovie
-        if(WillyWeatherApplication.myDatabase?.wishListDao()?.isWish(topRatedMovie!!.id)==1) {
+        if(WishListDatabase.getInstance(mContext)?.wishListDao()?.isWish(topRatedMovie!!.id)==1) {
             holder.binding.imgLike.setImageResource(R.drawable.like)
         }
         else{
@@ -76,15 +76,15 @@ class TopRatedMoviesListAdapter : PagedListAdapter<TopRatedMovie, PlayerViewHold
                     wishlist.posterPath = selectedMovie!!.poster_path
                     wishlist.movieTitle = selectedMovie!!.title
                     wishlist.releaseDate = selectedMovie!!.release_date
-                    if(WillyWeatherApplication.myDatabase?.wishListDao()?.isWish(selectedMovie!!.id)!=1) {
+                    if(WishListDatabase.getInstance(mContext)?.wishListDao()?.isWish(selectedMovie!!.id)!=1) {
                         binding.imgLike.setImageResource(R.drawable.like)
                         selectedMovie.isAddedToWishList=true
-                        WillyWeatherApplication.myDatabase?.wishListDao()?.addTowishdata(wishlist)
+                        WishListDatabase.getInstance(mContext)?.wishListDao()?.addTowishdata(wishlist)
                     }
                     else{
                         selectedMovie.isAddedToWishList=false
                         binding.imgLike.setImageResource(R.drawable.dislike)
-                        WillyWeatherApplication?.myDatabase?.wishListDao()?.delete(wishlist)
+                        WishListDatabase.getInstance(mContext)?.wishListDao()?.delete(wishlist)
                     }
                 }
             })

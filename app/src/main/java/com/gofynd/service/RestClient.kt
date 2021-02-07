@@ -2,7 +2,7 @@ package com.gofynd.service
 
 import android.util.Log
 import com.gofynd.util.CommonUtility
-import com.gofynd.view.WillyWeatherApplication.Companion.instance
+import com.gofynd.view.GoFyndApplication.Companion.instance
 import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.CacheControl

@@ -1,8 +1,10 @@
 package com.gofynd.repositories.wishListRepositry
 
 import androidx.lifecycle.MutableLiveData
+import com.gofynd.database.WishListDatabase
 import com.gofynd.database.Wishlist
-import com.gofynd.view.WillyWeatherApplication.Companion.myDatabase
+import com.gofynd.view.GoFyndApplication
+
 
 class WishListRepositry {
     val wishList: MutableLiveData<List<Wishlist?>?>
@@ -10,7 +12,7 @@ class WishListRepositry {
             val data =
                 MutableLiveData<List<Wishlist?>?>()
             val wishListData =
-                myDatabase!!.wishListDao()!!.wishListData
+                WishListDatabase.getInstance(GoFyndApplication.instance)!!.wishListDao()!!.wishListData
             data.postValue(wishListData)
             return data
         }
