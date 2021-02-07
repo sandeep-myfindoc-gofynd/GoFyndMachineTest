@@ -45,39 +45,12 @@ class TopRatedMoviesListAdapter : PagedListAdapter<TopRatedMovie, PlayerViewHold
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         var topRatedMovie : TopRatedMovie? =getItem(position)
         holder.binding.movie = topRatedMovie
-        var basePath : String;
-        basePath = "https://image.tmdb.org/t/p/w500/";
-        mContext?.let {
-            Glide.with(it)
-                .load(basePath+topRatedMovie?.poster_path)
-                .placeholder(R.drawable.loading)
-                .into(holder.binding.ivUserProfile)
-        }
-        Log.d(".isAddedToWishList",topRatedMovie?.isAddedToWishList.toString())
-        if(topRatedMovie!!.isAddedToWishList) {
+        if(WillyWeatherApplication.myDatabase?.wishListDao()?.isWish(topRatedMovie!!.id)==1) {
             holder.binding.imgLike.setImageResource(R.drawable.like)
         }
         else{
             holder.binding.imgLike.setImageResource(R.drawable.dislike)
         }
-        /*holder.binding.imgLike.setOnClickListener(View.OnClickListener {
-            val wishlist = Wishlist()
-            wishlist.movieId = topRatedMovie.id
-            wishlist.posterPath = topRatedMovie.poster_path
-            wishlist.movieTitle = topRatedMovie.title
-            wishlist.releaseDate = topRatedMovie.release_date
-            if(WillyWeatherApplication.myDatabase?.wishListDao()?.isWish(topRatedMovie.id)!=1) {
-                holder.binding.imgLike.setImageResource(R.drawable.like)
-                WillyWeatherApplication.myDatabase?.wishListDao()?.addTowishdata(wishlist)
-            }
-            else{
-                holder.binding.imgLike.setImageResource(R.drawable.dislike)
-                WillyWeatherApplication?.myDatabase?.wishListDao()?.delete(wishlist)
-            }
-        })*/
-
-
-
     }
     inner class PlayerViewHolder(var binding: LayoutSubitemTopratedmovieBinding) : RecyclerView.ViewHolder(binding.root) {
         init {

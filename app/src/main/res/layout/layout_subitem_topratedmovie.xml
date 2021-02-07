@@ -41,9 +41,9 @@
                     bind:layout_constraintBottom_toBottomOf="parent"
                     bind:layout_constraintStart_toStartOf="parent"
                     bind:layout_constraintTop_toTopOf="parent"
-
+                    bind:poster_path="@{movie.poster_path}"
                     />
-                <!--bind:poster_path="@{movie.poster_path}"-->
+                <!---->
                 <!--bind:poster_path="@{movie.poster_path}"-->
                 <TextView
                     android:id="@+id/tvName"

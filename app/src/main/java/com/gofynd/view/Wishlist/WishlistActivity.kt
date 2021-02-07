@@ -46,8 +46,6 @@ class WishlistActivity : SuperActivity() {
             }
 
             override fun onQueryTextChange(s: String): Boolean { // UserFeedback.show( "SearchOnQueryTextChanged: " + s);
-                Log.d("s",s.toString())
-
                 adapter?.filter?.filter(s)
                 return true
             }
@@ -55,19 +53,7 @@ class WishlistActivity : SuperActivity() {
         return true
 
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var intent = Intent(this, WishlistActivity::class.java)
-        when(item.getItemId())
 
-        {
-            R.id.menuFavorite-> /*startActivity(intent)*/""
-            else-> Log.d("Invalid","");
-
-
-        }
-
-        return true
-    }
     private fun fetchWishListData() {
         viewModel?.getWishList()?.observe(this, Observer {
             wishList->

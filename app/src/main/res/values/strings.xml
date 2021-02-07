@@ -1,5 +1,4 @@
 <resources>
-    <color name="colorPrimary">#DC2B292E</color>
     <string name="msg_empty">There is no data to display</string>
     <string name="msg_offline">Please check your network connectivity</string>
     <string name="title_top_rated_movies">Top Rated Movies</string>
@@ -8,4 +7,5 @@
     <string name="heading_team">Team Info</string>
     <string name="action_search">Search here</string>
     <string name="title_wishlist">WishList</string>
+    <string name="app_name">Go Fynd</string>
 </resources>
